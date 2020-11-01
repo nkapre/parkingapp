@@ -41,6 +41,13 @@ Several simplifying assumptions have been made while developing this application
 2. Vehicle slot size has been considered in modeling, but not in the actual reservation creation. In reality, a user's vehicle must match that of the slot size to be able to be properly parked. But, this is not a concern considered here.
 3. When a reservation is made, a parking slot being considered, must be locked for some time to allow a user to complete payment and finalize the reservation. To implement such a scheme, other libraries are needed, and it would have taken a greater time to get it right. Hence, that was dropped for now. Checks are made to ensure that a parking slot is available, before booking it. Highly concurrent conditions may fail in this implementation.
 4. Parking slots may have several features such as electric charging slots etc. A feature capability in introduced, but not implemented.
+5. Notion of currencies has been introduced to give an idea that I was making this application for a generic usability, not specific to a country. i18n can always be easily used in this scheme to allow localized languages.
+6. Synchronous REST end points were thought to be sufficient. Hence no messaging end points using brokers such as Kafka have been considered.
+7. Modeling was done using Open API v1 (Swagger) and not v3. This is only due to the present setup on my machine. I can very easily inroduce v3 and get this running.
+8. API versioning is not being considered here.
+9. Cricuit breaking using Hystrix etc is a passe. In the modern day implementations, it would be circuit breaking using a side-car patter such as Istio. But that would be too much to implement in this.
+10. Service registration and lookup is assumed to happen using the orchestration layer (e.g. Kubernetes)
+11. The configurations are stored in the SpringBoot properties file. This is ideally injected into the containers from the orchestration layer.
 
 @Todos
 - Complete the docker-compose setup so that the Spring Boot app and Mongo run independently
