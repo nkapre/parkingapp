@@ -1,0 +1,221 @@
+swagger: '2.0'
+info:
+  description: This is a ParkingLot Reservation API
+  version: 1.0.0
+  title: ParkingLot Reservation API
+  # put the contact info for your development or API team
+  contact:
+    email: nkapre@hotmail.com
+
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+# tags are used for organizing operations
+tags:
+  - name: admins
+    description: Secured Admin-only calls
+  - name: developers
+    description: Operations available to regular developers
+
+paths:
+  /reservation:
+    get:
+      summary: Gets a reservation
+      operationId: searchReservations
+      description: |
+        By passing in the appropriate options, you can search for
+        available reservations in the system
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: searchString
+          description: pass an optional search string for looking up reservations
+          required: false
+          type: string
+      responses:
+        200:
+          description: Parking reservations matching criteria
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ParkingReservation'
+        400:
+          description: bad input parameter
+    post:
+      summary: Adds a reservation item
+      operationId: addReservation
+      description: Adds new reservation to the system
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: ParkingReservation
+          description: Parking reservation to add
+          schema:
+            $ref: '#/definitions/ParkingReservation'
+      responses:
+        201:
+          description: Reservation created
+        400:
+          description: Invalid input, object invalid
+        409:
+          description: An existing reservation already exists
+  /parkingslot:
+    get:
+      summary: Gets a parking slot
+      operationId: getParkingLot
+      description: |
+        By passing in the appropriate options, you can search for
+        available parking slots in the system
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: searchString
+          description: pass an optional search string for looking up parking slots
+          required: false
+          type: string
+      responses:
+        200:
+          description: Parking slot matching criteria
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ParkingSlot'
+        400:
+          description: bad input parameter
+    post:
+      summary: Adds a ParkingSlot
+      operationId: addParkingSlot
+      description: Adds new parking slot to the system
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: ParkingSlot
+          description: Parking slot to add
+          schema:
+            $ref: '#/definitions/ParkingSlot'
+      responses:
+        201:
+          description: Parkign slot created
+        400:
+          description: Invalid input, object invalid
+        409:
+          description: An existing parking slot already exists
+
+definitions:
+  SpecialNeedsType:
+    type: string
+    enum: &SPECIAL_NEEDS
+      - NONE
+      - PREGNANT
+      - ELDERLY
+      - PHYSICALLY_CHALLENGED
+      - WAR_VETERAN
+  UserDetails:
+    type: object
+    properties:
+      userID:
+        type: integer
+      userName:
+        type: string
+      contactNumber:
+        type: string
+      address:
+        type: string
+      specialNeedsType:
+        $ref: '#/definitions/SpecialNeedsType'
+      vehicle:
+        $ref: '#/definitions/Vehicle'
+  Vehicle:
+    type: object
+    properties:
+      vehicleID:
+        type: integer
+      vehicleRegistration:
+        type: string
+      parkingSizeType:
+        type: integer
+  ParkingReservation:
+    type: object
+    properties:
+      reservationID:
+        type: integer
+      parkingLotID:
+        type: integer
+      userDetails:
+        $ref: '#/definitions/UserDetails'
+      parkingSlotNumber:
+        type: string
+      parkingStartDateTime:
+        type: string
+      parkingEndDateTime:
+        type: string
+      reservationConfirmationNumber:
+        type: string
+      rateDetails:
+        $ref: '#/definitions/RateDetails'
+  RateDetails:
+    type: object
+    properties:
+      rateDetailID:
+        type: integer
+      timeUnit:
+        type: integer
+      rate:
+        type: number
+        multipleOf: 0.1
+      rateCurrency:
+        type: integer
+      percentDiscountRider:
+        type: number
+        multipleOf: 0.1
+  ParkingSlot:
+    type: object
+    properties:
+      slotID:
+        type: integer
+      slotNumber:
+        type: string
+      parkingSizeType:
+        type: string
+        enum: &SIZES
+          - MINI
+          - HATCHBACK
+          - SEDAN
+          - SUV
+      specialNeedsType:
+        $ref: '#/definitions/SpecialNeedsType'
+      available:
+        type: boolean
+      rateDetail:
+        $ref: '#/definitions/RateDetails'
+  ParkingLot:
+    type: object
+    properties:
+      lotID:
+        type: integer
+      parkingLotName:
+        type: string
+      address:
+        type: string
+      openingTime:
+        type: string
+      closingTime:
+        type: string
+      parkingSlots:
+        type: array
+        items:
+          $ref: '#/definitions/ParkingSlot'
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+basePath: /sourcecodeadmin/ParkingLot/1.0.0
+schemes:
+  - https
