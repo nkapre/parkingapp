@@ -1,7 +1,7 @@
-# parkinglot
+# Parking Lot Application
 Parking lot reservation application demo
 
-##Overview 
+## Overview 
 The application allows making reservations of parking slots
 The application has been built using SpringBoot **REST (Jackson)** and **Java 1.8**. The backend used is Mongo DB. For Unit testing **Mockito** is used.
 The endpoints exposed are:
