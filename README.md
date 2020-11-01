@@ -35,6 +35,12 @@ The API jar executed in a Docker image and a docker-compose.yml has been supplie
 The 3 metrics of code quality that I gave special attention to were Cyclomatic Complexity, Affrent Coupling, and Cohesion metrics. All are well in check. This was measured using the code quality metrics in IntelliJ IDEA.
 
 # Notes
+Several simplifying assumptions have been made while developing this application.
+
+1. The application will capture the aspects of reservation and not the final pricing. For instance, if a vehicle is meant to be parked for 30 mins, but remained in the parking lot for 2 hours, then the pricing/penlaties may apply. This is not considered. Pricing in general is not a concern here.
+2. Vehicle slot size has been considered in modeling, but not in the actual reservation creation. In reality, a user's vehicle must match that of the slot size to be able to be properly parked. But, this is not a concern considered here.
+3. When a reservation is made, a parking slot being considered, must be locked for some time to allow a user to complete payment and finalize the reservation. To implement such a scheme, other libraries are needed, and it would have taken a greater time to get it right. Hence, that was dropped for now. Checks are made to ensure that a parking slot is available, before booking it. Highly concurrent conditions may fail in this implementation.
+4. Parking slots may have several features such as electric charging slots etc. A feature capability in introduced, but not implemented.
 
 @Todos
 - Complete the docker-compose setup so that the Spring Boot app and Mongo run independently
