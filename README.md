@@ -48,7 +48,10 @@ Several simplifying assumptions have been made while developing this application
 9. Cricuit breaking using Hystrix etc is a passe. In the modern day implementations, it would be circuit breaking using a side-car patter such as Istio. But that would be too much to implement in this.
 10. Service registration and lookup is assumed to happen using the orchestration layer (e.g. Kubernetes)
 11. The configurations are stored in the SpringBoot properties file. This is ideally injected into the containers from the orchestration layer.
+12. The implementation assumes that when a Parking Lot is introduced in the system and the reserved spots earmarked, it is like Master Data. This is a one time setup and should not be an application business concern. Of course, before handing out a reservation, the application must check if slots are available or not.
 
-@Todos
+# @Todos
+- After a reservation is handed out, the overall slot status should be returned so that that could be used for updating some external dashboard with the new availability status.
 - Complete the docker-compose setup so that the Spring Boot app and Mongo run independently
 - Complete the Mock tests. For now, only the ParkingLotController tests have been added partially to illustrate that this would be the unit testing strategy.
+- Retest the whole reservation procss
