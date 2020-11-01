@@ -6,10 +6,10 @@ The application allows making reservations of parking slots
 The application has been built using SpringBoot **REST (Jackson)** and **Java 1.8**. The backend used is Mongo DB. For Unit testing **Mockito** is used.
 The endpoints exposed are:
 
-POST /reservations - Creates a new reservation and allocates it a Confirmation Number
-GET /reservatons/{confirmationNumber} - Gets a reservation with a specified confirmation number
-POST /parkingLot - Creates a parking lot and all the slots in it.
-GET /parkingLot/{parkingLotName} - Gets a Parking Lot with a specified name with all the parking slots inside it.
+- POST /reservations - Creates a new reservation and allocates it a Confirmation Number
+- GET /reservatons/{confirmationNumber} - Gets a reservation with a specified confirmation number
+- POST /parkingLot - Creates a parking lot and all the slots in it.
+- GET /parkingLot/{parkingLotName} - Gets a Parking Lot with a specified name with all the parking slots inside it.
 
 The ParkingSlot endpoints are not implemented as this feature is not needed as of now.
 
