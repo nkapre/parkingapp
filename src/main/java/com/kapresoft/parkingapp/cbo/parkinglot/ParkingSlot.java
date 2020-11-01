@@ -4,6 +4,8 @@ import com.kapresoft.parkingapp.cbo.rates.RateDetails;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Objects;
+
 @Document
 public class ParkingSlot {
     @Id
@@ -60,5 +62,35 @@ public class ParkingSlot {
 
     public void setRateDetails(RateDetails rateDetails) {
         this.rateDetails = rateDetails;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ParkingSlot)) return false;
+        ParkingSlot that = (ParkingSlot) o;
+        return getSlotID() == that.getSlotID() &&
+                isAvailable() == that.isAvailable() &&
+                getSlotNumber().equals(that.getSlotNumber()) &&
+                getSlotSizeType() == that.getSlotSizeType() &&
+                getSpecialNeedsType() == that.getSpecialNeedsType() &&
+                getRateDetails().equals(that.getRateDetails());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getSlotID(), getSlotNumber(), getSlotSizeType(), getSpecialNeedsType(), isAvailable(), getRateDetails());
+    }
+
+    @Override
+    public String toString() {
+        return "ParkingSlot{" +
+                "slotID=" + slotID +
+                ", slotNumber='" + slotNumber + '\'' +
+                ", slotSizeType=" + slotSizeType +
+                ", specialNeedsType=" + specialNeedsType +
+                ", available=" + available +
+                ", rateDetails=" + rateDetails +
+                '}';
     }
 }

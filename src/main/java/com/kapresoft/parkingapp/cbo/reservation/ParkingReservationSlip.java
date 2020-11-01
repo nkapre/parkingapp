@@ -77,4 +77,15 @@ public class ParkingReservationSlip {
         return Objects.hash(getReservationConfirmationNumber(), getReservationDateTime(),
                 getParkingLotName(), getReservedSlotNumber());
     }
+
+    @Override
+    public String toString() {
+        return "ParkingReservationSlip{" +
+                "reservationConfirmationNumber='" + reservationConfirmationNumber + '\'' +
+                ", reservationDateTime='" + reservationDateTime + '\'' +
+                ", parkingLotName='" + parkingLotName + '\'' +
+                ", reservedSlotNumber='" + reservedSlotNumber + '\'' +
+                ", resrvationError='" + resrvationError + '\'' +
+                '}';
+    }
 }

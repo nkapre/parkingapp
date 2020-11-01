@@ -3,6 +3,8 @@ package com.kapresoft.parkingapp.cbo.reservation;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Objects;
+
 @Document(value = "parkingreservation")
 public class ParkingReservation {
     @Id
@@ -100,5 +102,41 @@ public class ParkingReservation {
 
     public void setParkingLotName(String parkingLotName) {
         this.parkingLotName = parkingLotName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ParkingReservation)) return false;
+        ParkingReservation that = (ParkingReservation) o;
+        return getReservationID() == that.getReservationID() &&
+                getParkingLotID() == that.getParkingLotID() &&
+                getUserID() == that.getUserID() &&
+                Float.compare(that.getRate(), getRate()) == 0 &&
+                getParkingLotName().equals(that.getParkingLotName()) &&
+                getParkingSlotNumber().equals(that.getParkingSlotNumber()) &&
+                getParkingStartDateTime().equals(that.getParkingStartDateTime()) &&
+                Objects.equals(getParkingEndDateTime(), that.getParkingEndDateTime()) &&
+                getReservationConfirmationNumber().equals(that.getReservationConfirmationNumber());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getReservationID(), getParkingLotID(), getParkingLotName(), getUserID(), getParkingSlotNumber(), getParkingStartDateTime(), getParkingEndDateTime(), getRate(), getReservationConfirmationNumber());
+    }
+
+    @Override
+    public String toString() {
+        return "ParkingReservation{" +
+                "reservationID=" + reservationID +
+                ", parkingLotID=" + parkingLotID +
+                ", parkingLotName='" + parkingLotName + '\'' +
+                ", userID=" + userID +
+                ", parkingSlotNumber='" + parkingSlotNumber + '\'' +
+                ", parkingStartDateTime='" + parkingStartDateTime + '\'' +
+                ", parkingEndDateTime='" + parkingEndDateTime + '\'' +
+                ", rate=" + rate +
+                ", reservationConfirmationNumber='" + reservationConfirmationNumber + '\'' +
+                '}';
     }
 }

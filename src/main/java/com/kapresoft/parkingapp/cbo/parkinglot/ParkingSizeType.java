@@ -27,4 +27,9 @@ public enum ParkingSizeType {
     public int getValue() {
         return this.parkingSizeType;
     }
+
+    @Override
+    public String toString() {
+        return this.parkingSizeTypeString;
+    }
 }

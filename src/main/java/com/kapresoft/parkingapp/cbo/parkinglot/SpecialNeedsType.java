@@ -12,4 +12,9 @@ public enum SpecialNeedsType {
         this.needsTypeString = needsTypeString;
         this.needsType = needsType;
     }
+
+    @Override
+    public String toString() {
+        return this.needsTypeString;
+    }
 }

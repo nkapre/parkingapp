@@ -99,4 +99,16 @@ public class ParkingLot {
     public int hashCode() {
         return Objects.hash(getLotID(), getParkingLotName(), getAddress(), getOpeningTime(), getClosingTime(), getParkingSlots());
     }
+
+    @Override
+    public String toString() {
+        return "ParkingLot{" +
+                "lotID=" + lotID +
+                ", parkingLotName='" + parkingLotName + '\'' +
+                ", address='" + address + '\'' +
+                ", openingTime='" + openingTime + '\'' +
+                ", closingTime='" + closingTime + '\'' +
+                ", parkingSlots=" + parkingSlots +
+                '}';
+    }
 }
