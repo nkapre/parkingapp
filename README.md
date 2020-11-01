@@ -31,7 +31,10 @@ In the scope of this work only Unit Testing is covered. Unit Testing is performe
 ## Deployment 
 The API jar executed in a Docker image and a docker-compose.yml has been supplied to ensure that the MongoDB and API jar images are all brought up properly for execution.
 
-#Notes
+## Code Quality
+The 3 metrics of code quality that I gave special attention to were Cyclomatic Complexity, Affrent Coupling, and Cohesion metrics. All are well in check. This was measured using the code quality metrics in IntelliJ IDEA.
+
+# Notes
 
 @Todos
 - Complete the docker-compose setup so that the Spring Boot app and Mongo run independently
