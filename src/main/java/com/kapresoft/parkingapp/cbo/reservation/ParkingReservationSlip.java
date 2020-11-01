@@ -7,6 +7,7 @@ public class ParkingReservationSlip {
     private String reservationDateTime;
     private String parkingLotName;
     private String reservedSlotNumber;
+    private String resrvationError;
 
     public ParkingReservationSlip() {
 
@@ -50,6 +51,14 @@ public class ParkingReservationSlip {
 
     public void setReservedSlotNumber(String reservedSlotNumber) {
         this.reservedSlotNumber = reservedSlotNumber;
+    }
+
+    public String getResrvationError() {
+        return resrvationError;
+    }
+
+    public void setResrvationError(String resrvationError) {
+        this.resrvationError = resrvationError;
     }
 
     @Override

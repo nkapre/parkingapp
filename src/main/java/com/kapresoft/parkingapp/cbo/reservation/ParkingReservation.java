@@ -8,6 +8,7 @@ public class ParkingReservation {
     @Id
     private int reservationID;
     private int parkingLotID;
+    private String parkingLotName;
     private int userID;
     private String parkingSlotNumber;
     private String parkingStartDateTime;
@@ -18,9 +19,10 @@ public class ParkingReservation {
     public ParkingReservation() {
     }
 
-    public ParkingReservation(int parkingLotID, int userID, String parkingSlotNumber, String parkingStartDateTime,
+    public ParkingReservation(int parkingLotID, String parkingLotName, int userID, String parkingSlotNumber, String parkingStartDateTime,
                               String parkingEndDateTime, float rate) {
         this.parkingLotID = parkingLotID;
+        this.parkingLotName = parkingLotName;
         this.userID = userID;
         this.parkingSlotNumber = parkingSlotNumber;
         this.parkingStartDateTime = parkingStartDateTime;
@@ -90,5 +92,13 @@ public class ParkingReservation {
 
     public void setReservationConfirmationNumber(String reservationConfirmationNumber) {
         this.reservationConfirmationNumber = reservationConfirmationNumber;
+    }
+
+    public String getParkingLotName() {
+        return parkingLotName;
+    }
+
+    public void setParkingLotName(String parkingLotName) {
+        this.parkingLotName = parkingLotName;
     }
 }
