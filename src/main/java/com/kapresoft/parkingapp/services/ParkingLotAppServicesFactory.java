@@ -1,5 +1,8 @@
 package com.kapresoft.parkingapp.services;
 
+/**
+ * Common factory to serve out instances of the differnt services. This is structured as a singleton.
+ */
 public class ParkingLotAppServicesFactory {
     private static final ParkingLotAppServicesFactory factory = new ParkingLotAppServicesFactory();
 
