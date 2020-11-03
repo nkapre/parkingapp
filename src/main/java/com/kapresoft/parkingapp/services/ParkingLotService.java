@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ParkingLotService {
+public class ParkingLotService implements ParkingLotServiceInf {
     private static final Logger logger = LoggerFactory.getLogger("ParkingLotService.class");
 
     @Autowired
@@ -26,7 +26,8 @@ public class ParkingLotService {
         this.parkingLotRepository = plr;
     }
 
-    public boolean addParkingLot (com.kapresoft.rest.model.ParkingLot parkingLot) {
+    @Override
+    public boolean addParkingLot(com.kapresoft.rest.model.ParkingLot parkingLot) {
         if (logger.isDebugEnabled()) {
             logger.debug("Entering addParkingLot");
         }
@@ -64,7 +65,8 @@ public class ParkingLotService {
         return true;
     }
 
-    public ParkingLot getParkingLot (final String parkingLotName) throws NoParkingLotFoundException {
+    @Override
+    public ParkingLot getParkingLot(final String parkingLotName) throws NoParkingLotFoundException {
         if (logger.isDebugEnabled()) {
             logger.debug("Entering getParkingLot");
         }

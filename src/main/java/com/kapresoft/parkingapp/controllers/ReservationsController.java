@@ -4,25 +4,26 @@ import com.kapresoft.parkingapp.cbo.parkinglot.SpecialNeedsType;
 import com.kapresoft.parkingapp.cbo.reservation.ParkingReservationSlip;
 import com.kapresoft.parkingapp.exceptions.NoFreeSlotAvailableException;
 import com.kapresoft.parkingapp.exceptions.ReservationException;
+import com.kapresoft.parkingapp.services.ParkingLotAppServicesFactory;
 import com.kapresoft.parkingapp.services.ParkingSlotService;
 import com.kapresoft.parkingapp.services.ReservationService;
+import com.kapresoft.parkingapp.services.ReservationServiceInf;
 import com.kapresoft.rest.model.ParkingReservation;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestClientException;
 
 @RestController
 public class ReservationsController {
     @Autowired
-    ReservationService reservationService;
+    ReservationServiceInf reservationService;
 
     public ReservationsController() {
-        this(new ReservationService());
+        this(getReservationService());
     }
-    public ReservationsController (ReservationService service) {
+    public ReservationsController (ReservationServiceInf service) {
         this.reservationService = service;
     }
     public void setReservationService(ReservationService service) {
@@ -48,7 +49,7 @@ public class ReservationsController {
         reservation.setUserID(parkingReservation.getUserDetails().getUserID());
 
         try {
-            ret = reservationService.addReservation(reservation,
+            ret = getReservationService().addReservation(reservation,
                     SpecialNeedsType.valueOf(parkingReservation.getUserDetails().getSpecialNeedsType().toString()));
             slip = getParkingReservationSlip(ret, false);
 
@@ -66,7 +67,7 @@ public class ReservationsController {
         ParkingReservationSlip slip = null;
 
         try {
-            ret = reservationService.getReservation(confirmationNumber);
+            ret = getReservationService().getReservation(confirmationNumber);
 
             slip = getParkingReservationSlip(ret, false);
 
@@ -96,6 +97,10 @@ public class ReservationsController {
         }
 
         return retSlip;
+    }
+
+    public static final ReservationServiceInf getReservationService () {
+        return ParkingLotAppServicesFactory.getInstance().getReservationService();
     }
 
 }

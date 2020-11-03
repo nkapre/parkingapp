@@ -1,7 +1,9 @@
 package com.kapresoft.parkingapp.controllers;
 
 import com.kapresoft.parkingapp.exceptions.NoParkingLotFoundException;
+import com.kapresoft.parkingapp.services.ParkingLotAppServicesFactory;
 import com.kapresoft.parkingapp.services.ParkingLotService;
+import com.kapresoft.parkingapp.services.ParkingLotServiceInf;
 import com.kapresoft.rest.model.ParkingLot;
 import com.kapresoft.rest.model.ParkingSlot;
 import com.kapresoft.rest.model.RateDetails;
@@ -76,7 +78,7 @@ public class ParkingLotController {
         }
     }
 
-    public ParkingLotService getParkingLotService() {
-        return parkingLotService;
+    public ParkingLotServiceInf getParkingLotService() {
+        return ParkingLotAppServicesFactory.getInstance().getInstance().getParkingLotService();
     }
 }

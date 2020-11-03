@@ -13,12 +13,13 @@ import org.slf4j.Logger;
 import java.util.List;
 
 @Service
-public class ParkingSlotService {
+public class ParkingSlotService implements ParkingSlotServiceInf {
     private static final Logger logger = LoggerFactory.getLogger("ParkingSlotService.class");
 
     @Autowired
     ParkingSlotRepository repository;
 
+    @Override
     public ParkingSlot getAvailableParkingSlotForBooking(SpecialNeedsType specialNeeds) throws NoFreeSlotAvailableException {
         if (logger.isDebugEnabled()) {
             logger.debug("Exiting getAvailableParkingSlotForBooking");
@@ -55,7 +56,8 @@ public class ParkingSlotService {
         return savedSlot;
     }
 
-    public ParkingSlot addParkingSlot (final ParkingLot parkingLot, final ParkingSlot parkingSlot) {
+    @Override
+    public ParkingSlot addParkingSlot(final ParkingLot parkingLot, final ParkingSlot parkingSlot) {
         if (logger.isDebugEnabled()) {
             logger.debug("Entering addParkingSlot");
         }

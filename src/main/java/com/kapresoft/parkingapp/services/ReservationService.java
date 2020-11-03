@@ -13,9 +13,16 @@ import org.springframework.stereotype.Service;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 
+/**
+ * This class implements the business operations to support the following operations:
+ * a. addReservation
+ * b. getReservation
+ *
+ */
+
 @Component
 @Service
-public class ReservationService {
+public class ReservationService implements ReservationServiceInf {
     private static final Logger logger = LoggerFactory.getLogger("ReservationService.class");
 
     @Autowired
@@ -29,6 +36,7 @@ public class ReservationService {
         this.parkingSlotService = pss;
     }
 
+    @Override
     public ParkingReservation addReservation(final ParkingReservation reservation, final SpecialNeedsType specialNeeds) {
         if (logger.isDebugEnabled()) {
             logger.debug("Entering addReservation");
@@ -57,7 +65,8 @@ public class ReservationService {
         return addedReservation;
     }
 
-    public ParkingReservation getReservation (final String confirmationNumber) {
+    @Override
+    public ParkingReservation getReservation(final String confirmationNumber) {
         if (logger.isDebugEnabled()) {
             logger.debug("Entering getReservation");
         }
